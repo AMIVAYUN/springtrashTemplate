@@ -8,7 +8,22 @@
 	<mapper namespace="com.ssafy.board.model.dao.MemberDao">
 
 		<insert id ="insert" parameterType="member">
-			insert into member values( #{username}, #{password}, #{email}, #{name}, #{nickname} )
+			insert into member values( #{username}, #{password}, #{email}, #{name}, #{nickname}, #{roletype} )
 		</insert>
+		<select id="selectAll" parameterType="member" resultMap="baseMember">
+			select * from member
+		</select>
 		
+		<select id="selectById" parameterType="String" resultMap="baseMember">
+			select * from member where username=#{username}
+		</select>
+		
+		<resultMap type="member" id="baseMember">
+			<result column="username" property="username"/>
+			<result column="password" property="password"/>
+			<result column="email" property="email" />
+			<result column="name" property="name"/>
+			<result column="nickname" property="nickname"/>
+			<result column="roletype" property="roletype"/>
+		</resultMap>
 	</mapper>

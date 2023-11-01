@@ -41,5 +41,10 @@ public class ViewController {
 		return "login";
 	}
 	
+	@GetMapping("/board/write")
+	public String write() {
+		return "write";
+	}
+	
 	
 }

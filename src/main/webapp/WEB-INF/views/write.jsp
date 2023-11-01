@@ -19,7 +19,6 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&display=swap" rel="stylesheet">
-
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	
     </head>
@@ -27,16 +26,43 @@
 		<div class="wrapper">
 
 			<div class="section title">
-				<input type="text" placeholder="제목">
+				<input type="text" placeholder="제목" id="title">
 			</div>
 			<div class="section content">
-				<textarea placeholder="내용"></textarea>
+				<textarea placeholder="내용" id="content"></textarea>
 			</div>
 			
 			<div class="section footer">
-				<a class="btn cancel" id="cancel">취소</a>
+				<a class="btn cancel" id="cancel" href="/boardPage">취소</a>
 				<a class="btn save dark" id="submit">출제</a>
 			</div>
 		</div>
 	</body>
+	<script>
+	submit.addEventListener("click", async function(){
+		let obj = new Object();
+		obj.title = title.value;
+		obj.content = content.value;
+		const res = await fetch( "/board", {
+			method: "post",
+			headers: {
+				'Content-Type':'application/json'
+			},
+			body: JSON.stringify(obj)
+			
+		
+		})
+		
+		const result = await res.json();
+		
+		if( result ){
+			alert("등록 성공");
+			
+		}else{
+			alert("에러 발생")
+		}
+	})
+	
+	
+	</script>
 </html>

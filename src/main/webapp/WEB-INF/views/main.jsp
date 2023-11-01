@@ -26,10 +26,10 @@
 				<i class="fa-solid fa-magnifying-glass" id="searchicon"></i>
 			</div>
 			<div class="post-area">
-				<a class="btn dark write" href="">글 작성</a>
+				<a class="btn dark write" href="/board/write">글 작성</a>
 			</div>
 			<div class="board">
-				<table>
+				<table id="btable">
 					<colgroup>
 						<col class="sizeNum">
 						<col class="sizeObject">
@@ -42,27 +42,7 @@
 						<th>작성일</th>
 						<th>조회 수</th>
 					</tr>
-					<tr class="board-posted">
-						<td class="num">---</td>
-						<td class="writer">---</td>
-						<td class="title">---</td>
-						<td class="date"></td> 
-						<td class="view"></td> 
-					</tr>
-					<tr class="board-posted">
-						<td class="num">---</td>
-						<td class="writer">---</td>
-						<td class="title">---</td>
-						<td class="date"></td> 
-						<td class="view"></td> 
-					</tr>
-					<tr class="board-posted">
-						<td class="num">---</td>
-						<td class="writer">---</td>
-						<td class="title">---</td>
-						<td class="date"></td> 
-						<td class="view"></td> 
-					</tr>
+
 				</table>
 			</div>
 			<div class="paging">
@@ -84,4 +64,25 @@
 		
 	
 	</body>
+	<script>
+	window.onload = async function(){
+		const boards = await fetch( "/boards" );
+		let datas = await boards.json();
+		console.log( datas );
+		for( data of datas ){
+			console.log( data );
+			//백틱이 안먹네
+	
+			btable.innerHTML += `<tr class="board-posted">`+
+			`<td class="num">`+data.board_id+`</td>`+
+			`<td class="writer">`+data.username+`</td>`+
+			`<td class="title">`+data.title+`</td>`+
+			`<td class="date">`+data.create_date+`</td>`+ 
+			`<td class="view">`+data.views+`</td>`+ 
+		`</tr>` 
+		}
+	}
+	
+	
+	</script>
 </html>

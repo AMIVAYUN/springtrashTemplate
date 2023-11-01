@@ -8,6 +8,24 @@
 	<mapper namespace="com.ssafy.board.model.dao.BoardDao">
 		
 		<insert id ="insert" parameterType="board">
-			insert into board values( #{board_id}, #{username}, #{title}, #{content},#{create_date} )
+			insert into board( username, title, content, isglobal,status ) values( #{username}, #{title}, #{content}, #{isglobal}, #{status} )
 		</insert>
+		
+		<select id="selectAll" resultMap="baseBoard">
+			select * from board where status='active'
+		</select>
+		
+		
+		
+		<resultMap type="board" id="baseBoard">
+			<result column="board_id" property="board_id"/>
+			<result column="username" property="username"/>
+			<result column="title" property="title"/>
+			<result column="content" property="content"/>
+			<result column="create_date" property="create_date"/>
+			<result column="status" property="status"/>
+			<result column="views" property="views"/>
+			<result column="isglobal" property="isglobal"/>
+		</resultMap>
+		
 	</mapper>
